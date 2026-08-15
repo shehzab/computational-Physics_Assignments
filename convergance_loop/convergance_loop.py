@@ -6,7 +6,7 @@ def sqrt_bisection(n, tol=1e-6):
   """Return (sqrt_estimate, n_iterations) for sqrt(n) using bisection on the interval [0, max(n,1)] until the interval width < tol."""
 
   if n < 0:
-    raise valueError("n must be non-negative")
+      raise ValueError("n must be non-negative")
   lo, hi = 0.0, max(n,1.0)
   iterations = 0
   while (hi - lo) > tol:
@@ -16,7 +16,7 @@ def sqrt_bisection(n, tol=1e-6):
     else:
       lo = mid
     iterations += 1
-    return (lo+hi)/2, iterations
+  return (lo+hi)/2, iterations
 
 if __name__ == "__main__":
   import math

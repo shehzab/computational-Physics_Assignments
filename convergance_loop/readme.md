@@ -86,17 +86,17 @@ Raises a `ValueError` if `n` is negative, since square roots of negative numbers
 
 ---
 
-## Sample Output (intended)
+## Sample Output
 
 ```text
      n |  bisection sqrt |       math.sqrt | iterations
 ----------------------------------------------------------
-     2 |      1.41421354 |       1.41421356 |         21
-     7 |      2.64575136 |       2.64575131 |         23
-   100 |     10.00000000 |      10.00000000 |         27
+     2 |       1.41421366 |       1.41421356 |         21
+     7 |       2.64575106 |       2.64575131 |         23
+   100 |       9.99999978 |      10.00000000 |         27
 ```
 
-*(Exact iteration counts depend on the initial interval width and `tol`.)*
+*(Verified by running the script. Exact iteration counts depend on the initial interval width and `tol`.)*
 
 ---
 
@@ -115,33 +115,6 @@ O(\log(1/\text{tol}))
 $$
 
 which is very fast compared to naive linear search methods.
-
----
-
-## Known Issues
-
-The current code has two bugs that should be fixed before use:
-
-1. **`return` is inside the `while` loop.** As written, the function exits after the very first iteration instead of looping until the interval shrinks below `tol`. The `return (lo+hi)/2, iterations` line should be dedented so it sits *after* the loop, not inside it.
-2. **`valueError` should be `ValueError`.** Python's built-in exception class is capitalized; as written this will raise a `NameError` instead of the intended `ValueError` when `n < 0`.
-
-Fixed version of the affected section:
-
-```python
-def sqrt_bisection(n, tol=1e-6):
-    if n < 0:
-        raise ValueError("n must be non-negative")
-    lo, hi = 0.0, max(n, 1.0)
-    iterations = 0
-    while (hi - lo) > tol:
-        mid = (lo + hi) / 2
-        if mid * mid > n:
-            hi = mid
-        else:
-            lo = mid
-        iterations += 1
-    return (lo + hi) / 2, iterations
-```
 
 ---
 
