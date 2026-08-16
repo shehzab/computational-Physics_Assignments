@@ -10,5 +10,5 @@ This repo is for college purpose — physics-based maths problems solved using P
 - `convergance_loop` — Square root calculation using the bisection method
 
 ## Requirements
-
+## code bases
 - Python 3.x
